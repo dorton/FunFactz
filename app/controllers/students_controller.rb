@@ -28,7 +28,7 @@ class StudentsController < ApplicationController
 
     respond_to do |format|
       if @student.save
-        format.html { redirect_to @student, notice: 'Student was successfully created.' }
+        format.html { redirect_to @student, notice: 'How Fun Was That!' }
         format.json { render :show, status: :created, location: @student }
       else
         format.html { render :new }
@@ -69,6 +69,6 @@ class StudentsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def student_params
-      params.require(:student).permit(:name, :fun_fact, :profile_image, :remote_profile_image_url, :email)
+      params.require(:student).permit!
     end
 end

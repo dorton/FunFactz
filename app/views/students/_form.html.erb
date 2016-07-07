@@ -1,52 +1,60 @@
 
 
+  <%= simple_form_for(@student, html: { class: 'form-horizontal' }) do |f| %>
+    <% if @student.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@student.errors.count, "error") %> prohibited this student from being saved:</h2>
 
-<%= simple_form_for(@student, html: { class: 'form-horizontal' }) do |f| %>
-  <% if @student.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@student.errors.count, "error") %> prohibited this student from being saved:</h2>
+        <ul>
+        <% @student.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
 
-      <ul>
-      <% @student.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="container-fluid">
-    <div class="row">
-    <col-md-4>
-      <% if @student.profile_image.present? %>
-        <%= image_tag attachment_url(@student, :profile_image, :fill, 180, 180, format: "jpg"), class: "img-thumbnail img-circle img-resposive" %>
-        <h2><%= @student.name %></h2>
-        <h4>Change Profile Picture</h4>
-          <%= f.attachment_field :profile_image %>
-          <%= f.input :remote_profile_image_url, label: "Or specify URL" %>
-        <br>
-      <% else %>
-        <%= image_tag "team-member-1.jpg", width: "180", class: "img-thumbnail img-circle img-resposive" %>
-        <h4>Upload Profile Picture</h4>
-          <%= f.attachment_field :profile_image %>
-          <%= f.input :remote_profile_image_url, label: "Or specify URL" %>
-
+    <div class="container-fluid">
+      <div class="row">
+        <col-md-8>
+        </col-md-8>
+      <col-md-4>
+        <div class="center">
+        <% if @student.profile_image.present? %>
+          <%= image_tag attachment_url(@student, :profile_image, :fill, 180, 180, format: "jpg"), class: "img-thumbnail img-circle img-resposive" %>
           <h2><%= @student.name %></h2>
-        <br>
-      <% end %>
-    </col-md-4>
-    <col-md-8>
-    </col-md-8>
+        </div>
+          <h4>Change Profile Picture</h4>
+            <%= f.attachment_field :profile_image %>
+            <%= f.input :remote_profile_image_url, label: "Or specify URL" %>
+          <br>
+
+        <% else %>
+
+        <div class="center">
+          <%= image_tag "team-member-1.jpg", width: "180", class: "img-thumbnail img-circle img-resposive" %>
+          <h2><%= @student.name %></h2>
+        </div>
+
+          <h4>Upload Profile Picture</h4>
+            <%= f.attachment_field :profile_image %>
+            <%= f.input :remote_profile_image_url, label: "Or specify URL" %>
+          <br>
+        <% end %>
+      </col-md-4>
+      <col-md-8>
+      </col-md-8>
+      </div>
     </div>
-  </div>
-
-    <%= f.input :name %>
-    <%= f.input :fun_fact, as: :text %>
-    <%= f.association :cohorts, as: :radio_buttons, label: "Cohort" %>
 
 
-    <%= f.button :submit, "Fun Fact, Create!", :class => 'btn-primary' %>
+      <%= f.input :name %>
+      <%= f.input :fun_fact, as: :text %>
+      <%= f.association :cohorts, as: :radio_buttons, label: "Cohort" %>
+
+
+      <%= f.button :submit, "Fun Fact, Create!", :class => 'btn-primary' %>
 
 
 
 
-<% end %>
+  <% end %>
