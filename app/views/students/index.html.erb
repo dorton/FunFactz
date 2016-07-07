@@ -1,28 +1,28 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Listing Students</h1>
+<h1>These Are Such Fun Facts!</h1>
 
-<table>
+<table class="table table-bordered table-hover">
   <thead>
     <tr>
+      <th>Profile image</th>
       <th>Name</th>
       <th>Fun fact</th>
-      <th>Profile image</th>
-      <th>Email</th>
-      <th colspan="3"></th>
+      <th>Class</th>
     </tr>
   </thead>
 
   <tbody>
     <% @students.each do |student| %>
       <tr>
-        <td><%= student.name %></td>
+        <td><%= image_tag attachment_url(student, :profile_image, :fill, 100, 100, format: "jpg"), class: "img-thumbnail img-circle img-resposive" %></td>
+        <td><%= link_to student.name, student %></td>
         <td><%= student.fun_fact %></td>
-        <td><%= student.profile_image_id %></td>
-        <td><%= student.email %></td>
-        <td><%= link_to 'Show', student %></td>
-        <td><%= link_to 'Edit', edit_student_path(student) %></td>
-        <td><%= link_to 'Destroy', student, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td>
+            <% student.cohorts.each do |cohort| %>
+              <%= cohort.name %>
+            <% end %>
+        </td>
       </tr>
     <% end %>
   </tbody>
