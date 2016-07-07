@@ -13,7 +13,7 @@
   </thead>
 
   <tbody>
-    <% @students.each do |student| %>
+    <% @students.quick_all.each do |student| %>
       <tr>
         <td><%= image_tag attachment_url(student, :profile_image, :fill, 100, 100, format: "jpg"), class: "img-thumbnail img-circle img-resposive" %></td>
         <td><%= link_to student.name, student %></td>
