@@ -1,0 +1,62 @@
+<%= simple_form_for(@user, html: { class: 'form-horizontal' }) do |f| %>
+  <% if @student.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@student.errors.count, "error") %> prohibited this student from being saved:</h2>
+
+      <ul>
+      <% @student.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="container-fluid">
+  <div class="row">
+  <col-md-4>
+    <% if @user.profile_image.present? %>
+      <%= image_tag attachment_url(@user, :profile_image, :fill, 180, 180, format: "jpg"), class: "img-thumbnail img-circle img-resposive" %>
+      <h2><%= @user.name %></h2>
+      <h4>Change Profile Picture</h4>
+        <%= f.attachment_field :profile_image %>
+        <%= f.input :remote_profile_image_url, label: "Or specify URL" %>
+      <br>
+    <% else %>
+      <%= image_tag "team-member-1.jpg", width: "180", class: "img-thumbnail img-circle img-resposive" %>
+      <h4>Upload Profile Picture</h4>
+        <%= f.attachment_field :profile_image %>
+        <%= f.input :remote_profile_image_url, label: "Or specify URL" %>
+
+        <h2><%= @user.name %></h2>
+      <br>
+    <% end %>
+  </col-md-4>
+  <col-md-8>
+  </col-md-8>
+  </div>
+</div>
+
+  <%= f.input :first_name %>
+  <%= f.input :last_name %>
+  <%= f.input :email %>
+  <!-- <%= f.input :password %> -->
+<% if current_user.super_admin? %>
+  <%= f.input :teacher %>
+  <%= f.input :substitute %>
+  <%= f.input :admin %>
+  <%= f.input :super_admin %>
+<% end %>
+
+  <%= f.association :grades,   as: :check_boxes  %>
+  <%= f.association :subjects,   as: :check_boxes  %>
+  <%= f.association :schools,   as: :check_boxes  %>
+
+
+<% if current_user.teacher? %>
+
+<% end %>
+
+  <%= f.button :submit, :class => 'btn-primary' %>
+  <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                users_path, :class => 'btn btn-default' %>
+<% end %>
