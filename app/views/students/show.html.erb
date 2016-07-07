@@ -1,24 +1,23 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-  <strong>Name:</strong>
-  <%= @student.name %>
-</p>
-
-<p>
-  <strong>Fun fact:</strong>
-  <%= @student.fun_fact %>
-</p>
-
-<p>
-  <strong>Profile image:</strong>
-  <%= @student.profile_image_id %>
-</p>
-
-<p>
-  <strong>Email:</strong>
-  <%= @student.email %>
-</p>
-
-<%= link_to 'Edit', edit_student_path(@student) %> |
-<%= link_to 'Back', students_path %>
+<div class="container-fluid">
+  <div class="row center">
+    <col-md-8>
+    </col-md-8>
+  <col-md-4>
+    <% if @student.profile_image.present? %>
+      <%= image_tag attachment_url(@student, :profile_image, :fill, 180, 180, format: "jpg"), class: "img-thumbnail img-circle img-resposive" %>
+      <h2><%= @student.name %></h2>
+    <% else %>
+      <%= image_tag "team-member-1.jpg", width: "180", class: "img-thumbnail img-circle img-resposive" %>
+      <h2><%= @student.name %></h2>
+    <% end %>
+    <h3>Fun Fact</h3>
+    <%= @student.fun_fact %>
+    <h3>Cohort</h3>
+    <% @student.cohorts.each do |cohort| %>
+      <%= cohort.name %>
+    <% end %>
+  </col-md-4>
+  <col-md-8>
+  </col-md-8>
+  </div>
+</div>
