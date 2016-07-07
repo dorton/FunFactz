@@ -10,7 +10,7 @@
 Cohort.create([{ name: 'Front End', start_date: "2016-05-23" }, { name: 'Back End', start_date: "2016-05-23" }, { name: 'iOS', start_date: "2016-06-13" }])
 
 Cohort.all.each do |cohort|
-12.times do
+5.times do
   student = Student.new
   student.name = Faker::Name.name
   student.fun_fact = Faker::Hipster.sentences(1).join
