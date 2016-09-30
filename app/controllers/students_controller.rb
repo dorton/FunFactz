@@ -15,7 +15,7 @@ class StudentsController < ApplicationController
   # GET /students/new
   def new
     @student = Student.new
-    @lastcohorts = Cohort.last(3).map { |a| a.name }
+    @lastcohorts = Cohort.last(3)
   end
 
   # GET /students/1/edit

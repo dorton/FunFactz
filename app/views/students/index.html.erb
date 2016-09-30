@@ -9,6 +9,7 @@
       <th>Name</th>
       <th>Fun fact</th>
       <th>Class</th>
+      <th>Start Date</th>
     </tr>
   </thead>
 
@@ -22,6 +23,11 @@
             <% student.cohorts.each do |cohort| %>
               <%= cohort.name %>
             <% end %>
+        </td>
+        <td>
+          <% student.cohorts.each do |cohort| %>
+            <%= cohort.start_date %>
+          <% end %>
         </td>
       </tr>
     <% end %>
